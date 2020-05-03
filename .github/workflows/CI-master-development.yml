@@ -37,6 +37,7 @@ jobs:
         ./ci-build.sh
     - name: Archive acceptance test results
       uses: actions/upload-artifact@v1
+      if: ${{ always() }}
       with:
         name: acceptance-test-result
         path: acceptance-test/build/reports/tests
