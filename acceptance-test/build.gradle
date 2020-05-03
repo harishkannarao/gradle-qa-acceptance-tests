@@ -1,0 +1,13 @@
+dependencies {
+    testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
+    testImplementation("com.github.dzieciou.testing:curl-logger:$restAssuredCurlLoggerVersion") {
+        exclude module: 'slf4j-api'
+    }
+    testImplementation("ch.qos.logback:logback-classic:$logbackVersion")
+    testImplementation("ch.qos.logback:logback-core:$logbackVersion")
+    testImplementation("org.slf4j:slf4j-api:$slf4jVersion")
+    testImplementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion")
+    testImplementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion")
+    testImplementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    testImplementation("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
+}

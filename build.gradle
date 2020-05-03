@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url = "https://plugins.gradle.org/m2/" }
+    }
+}
+
+plugins {
+    id "java-library"
+}
+
+allprojects {
+    apply plugin: "java-library"
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    sourceCompatibility = "$javaVersion"
+
+    configurations {
+        implementation {
+            exclude group: 'junit', module: 'junit'
+        }
+        testImplementation {
+            exclude group: 'junit', module: 'junit'
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+
+        systemProperties = System.properties.stringPropertyNames().collectEntries {
+            [(it): System.getProperty(it)]
+        }
+    }
+
+    dependencies {
+        testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
+        testImplementation("org.hamcrest:hamcrest:$hamcrestVersion")
+    }
+}
