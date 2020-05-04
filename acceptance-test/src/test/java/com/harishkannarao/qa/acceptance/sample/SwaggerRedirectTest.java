@@ -1,13 +1,12 @@
 package com.harishkannarao.qa.acceptance.sample;
 
-import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.equalTo;
 
 public class SwaggerRedirectTest extends AbstractBaseTest {
 
@@ -20,7 +19,7 @@ public class SwaggerRedirectTest extends AbstractBaseTest {
                 .get();
 
         assertThat(response.statusCode(), equalTo(302));
-        assertThat(response.getHeader("Location"), equalTo(testProperties.applicationBaseUrl() + "/swagger-ui/index.html?configUrl=/api-docs/swagger-config"));
+        assertThat(response.getHeader("Location"), endsWith("/swagger-ui/index.html?configUrl=/api-docs/swagger-config"));
     }
 
     @Test
