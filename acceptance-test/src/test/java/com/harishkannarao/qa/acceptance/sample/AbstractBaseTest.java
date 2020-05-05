@@ -7,6 +7,7 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
+
+import static io.restassured.RestAssured.given;
 
 public abstract class AbstractBaseTest {
     private static final Logger log = LoggerFactory.getLogger(AbstractBaseTest.class);
@@ -25,12 +28,13 @@ public abstract class AbstractBaseTest {
     protected final TestProperties testProperties = new TestProperties(String.format("properties/%s.properties", environment));
 
     @BeforeEach
-    void printTestNameBeforeStart(TestInfo testInfo) {
+    void printTestContextBeforeStart(TestInfo testInfo) {
         log.info("Starting test: {}", testInfo.getDisplayName());
+        printAppVersion();
     }
 
     @AfterEach
-    void printTestNameAfterComplete(TestInfo testInfo) {
+    void printTestContextAfterComplete(TestInfo testInfo) {
         log.info("Completing test: {}", testInfo.getDisplayName());
     }
 
@@ -55,6 +59,15 @@ public abstract class AbstractBaseTest {
 
     private RedirectConfig createRedirectConfig(boolean followRedirect) {
         return RedirectConfig.redirectConfig().followRedirects(followRedirect);
+    }
+
+    private void printAppVersion() {
+        given()
+                .spec(createRequestSpec())
+                .basePath("/health-check")
+                .accept(ContentType.JSON)
+                .when()
+                .get();
     }
 
 }
