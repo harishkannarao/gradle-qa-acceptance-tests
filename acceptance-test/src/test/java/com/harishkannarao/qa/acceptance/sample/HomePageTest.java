@@ -31,6 +31,6 @@ public class HomePageTest extends AbstractBaseTest {
         WebDriver webDriver = newWebDriver();
         webDriver.navigate().to(testProperties.applicationBaseUrl());
         List<WebElement> result = webDriver.findElements(By.id("utc_date"));
-        assertThat(result, empty());
+        assertThat(result, not(empty()));
     }
 }
