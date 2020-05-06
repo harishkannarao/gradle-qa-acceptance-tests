@@ -10,4 +10,5 @@ dependencies {
     testImplementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion")
     testImplementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
     testImplementation("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
+    testImplementation("commons-io:commons-io:${commonsIoVersion}")
 }

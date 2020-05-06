@@ -1,6 +1,8 @@
 package com.harishkannarao.qa.acceptance.sample;
 
 import com.github.dzieciou.testing.curl.CurlLoggingRestAssuredConfigFactory;
+import com.harishkannarao.qa.acceptance.sample.webdriver.WebDriverFactory;
+import com.harishkannarao.qa.acceptance.sample.webdriver.WebDriverTestWatcher;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.RedirectConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -12,6 +14,8 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +23,7 @@ import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
 
+@ExtendWith(value = {WebDriverTestWatcher.class})
 public abstract class AbstractBaseTest {
     private static final Logger log = LoggerFactory.getLogger(AbstractBaseTest.class);
 
@@ -28,14 +33,18 @@ public abstract class AbstractBaseTest {
     protected final TestProperties testProperties = new TestProperties(String.format("properties/%s.properties", environment));
 
     @BeforeEach
-    void printTestContextBeforeStart(TestInfo testInfo) {
+    void beforeTestStart(TestInfo testInfo) {
         log.info("Starting test: {}", testInfo.getDisplayName());
         printAppVersion();
     }
 
     @AfterEach
-    void printTestContextAfterComplete(TestInfo testInfo) {
+    void afterTestComplete(TestInfo testInfo) {
         log.info("Completing test: {}", testInfo.getDisplayName());
+    }
+
+    protected WebDriver newWebDriver() {
+        return WebDriverFactory.INSTANCE.newWebDriver();
     }
 
     protected RequestSpecification createRequestSpec() {

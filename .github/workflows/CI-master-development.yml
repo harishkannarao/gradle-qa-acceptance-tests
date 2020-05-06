@@ -41,3 +41,9 @@ jobs:
       with:
         name: acceptance-test-result
         path: acceptance-test/build/reports/tests
+    - name: Archive acceptance test screenshots
+      uses: actions/upload-artifact@v1
+      if: ${{ always() }}
+      with:
+        name: acceptance-test-screenshots
+        path: acceptance-test/screenshots
