@@ -34,13 +34,13 @@ public abstract class AbstractBaseTest {
 
     @BeforeEach
     void beforeTestStart(TestInfo testInfo) {
-        log.info("Starting test: {}", testInfo.getDisplayName());
+        log.info("Test Context :: Starting test: {}", testInfo.getDisplayName());
         printAppVersion();
     }
 
     @AfterEach
     void afterTestComplete(TestInfo testInfo) {
-        log.info("Completing test: {}", testInfo.getDisplayName());
+        log.info("Test Context :: Completing test: {}", testInfo.getDisplayName());
     }
 
     protected WebDriver newWebDriver() {
