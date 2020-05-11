@@ -27,8 +27,7 @@ import static io.restassured.RestAssured.given;
 public abstract class AbstractBaseTest {
     private static final Logger log = LoggerFactory.getLogger(AbstractBaseTest.class);
 
-    protected final String environment = Optional.ofNullable(System.getenv("TEST_ENVIRONMENT"))
-            .orElse("local");
+    protected final String environment = resolveEnvironment();
 
     protected final TestProperties testProperties = new TestProperties(String.format("properties/%s.properties", environment));
 
@@ -77,6 +76,12 @@ public abstract class AbstractBaseTest {
                 .accept(ContentType.JSON)
                 .when()
                 .get();
+    }
+
+    private String resolveEnvironment() {
+        return Optional.ofNullable(System.getenv("TEST_ENVIRONMENT"))
+                .orElseGet(() -> Optional.ofNullable(System.getProperty("testEnvironment"))
+                        .orElse("local"));
     }
 
 }

@@ -18,6 +18,8 @@ Development environment:
 
     TEST_ENVIRONMENT='development' ./gradlew clean build
     
+    ./gradlew clean build -DtestEnvironment=development
+    
 ## Run tests against local (default)
 
     ./gradlew clean build
