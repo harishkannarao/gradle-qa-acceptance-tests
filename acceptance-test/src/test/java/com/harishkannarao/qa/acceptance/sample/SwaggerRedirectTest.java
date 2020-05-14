@@ -1,5 +1,6 @@
 package com.harishkannarao.qa.acceptance.sample;
 
+import com.harishkannarao.qa.acceptance.sample.tag.Development;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.equalTo;
 
+@Development
 public class SwaggerRedirectTest extends AbstractBaseTest {
 
     @Test

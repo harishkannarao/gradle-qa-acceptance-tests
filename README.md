@@ -16,13 +16,24 @@ Development environment:
 
 ## Run tests against development
 
-    TEST_ENVIRONMENT='development' ./gradlew clean build
+    TEST_ENVIRONMENT='development' ./gradlew clean build -PincludeTags=regression,development
     
-    ./gradlew clean build -DtestEnvironment=development
+    ./gradlew clean build -PincludeTags=regression,development -DtestEnvironment=development
     
-## Run tests against local (default)
+## Run all tests against local (default)
 
     ./gradlew clean build
+    
+## Filter tests by tags
+
+Include tags
+
+    ./gradlew clean build -PincludeTags=regression,development
+
+Exclude tags
+    
+    ./gradlew clean build -PexcludeTags=regression,development
+    
     
 ## Run tests against development in Github Actions CI
 

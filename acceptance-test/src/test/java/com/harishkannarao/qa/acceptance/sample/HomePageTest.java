@@ -1,5 +1,6 @@
 package com.harishkannarao.qa.acceptance.sample;
 
+import com.harishkannarao.qa.acceptance.sample.tag.Regression;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@Regression
 public class HomePageTest extends AbstractBaseTest {
 
     @Test

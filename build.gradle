@@ -30,7 +30,14 @@ allprojects {
     }
 
     test {
-        useJUnitPlatform()
+        useJUnitPlatform {
+            if(project.hasProperty("includeTags")) {
+                includeTags = project.property("includeTags").toString().split(",")
+            }
+            if(project.hasProperty("excludeTags")) {
+                excludeTags = project.property("excludeTags").toString().split(",")
+            }
+        }
 
         systemProperties = System.properties.stringPropertyNames().collectEntries {
             [(it): System.getProperty(it)]

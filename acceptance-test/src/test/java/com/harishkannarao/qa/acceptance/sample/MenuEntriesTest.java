@@ -1,5 +1,6 @@
 package com.harishkannarao.qa.acceptance.sample;
 
+import com.harishkannarao.qa.acceptance.sample.tag.Regression;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -9,6 +10,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@Regression
 public class MenuEntriesTest extends AbstractBaseTest {
 
     @Test
