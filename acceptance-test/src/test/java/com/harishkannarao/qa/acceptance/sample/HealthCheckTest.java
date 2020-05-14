@@ -1,5 +1,6 @@
 package com.harishkannarao.qa.acceptance.sample;
 
+import com.harishkannarao.qa.acceptance.sample.tag.Development;
 import com.harishkannarao.qa.acceptance.sample.tag.Regression;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -11,6 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @Regression
+@Development
 public class HealthCheckTest extends AbstractBaseTest {
 
     @Test
