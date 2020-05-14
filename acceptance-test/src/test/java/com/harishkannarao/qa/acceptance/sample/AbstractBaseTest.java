@@ -1,14 +1,8 @@
 package com.harishkannarao.qa.acceptance.sample;
 
-import com.github.dzieciou.testing.curl.CurlLoggingRestAssuredConfigFactory;
+import com.harishkannarao.qa.acceptance.sample.restassured.RestAssuredFactory;
 import com.harishkannarao.qa.acceptance.sample.webdriver.WebDriverFactory;
 import com.harishkannarao.qa.acceptance.sample.webdriver.WebDriverTestWatcher;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.config.RedirectConfig;
-import io.restassured.config.RestAssuredConfig;
-import io.restassured.filter.log.LogDetail;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.AfterEach;
@@ -51,22 +45,7 @@ public abstract class AbstractBaseTest {
     }
 
     protected RequestSpecification createRequestSpec(boolean followRedirect) {
-        return new RequestSpecBuilder()
-                .setBaseUri(testProperties.applicationBaseUrl())
-                .setConfig(createRestAssuredConfig(followRedirect))
-                .addFilter(new RequestLoggingFilter(LogDetail.ALL))
-                .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-                .build();
-    }
-
-    private RestAssuredConfig createRestAssuredConfig(boolean followRedirect) {
-        RestAssuredConfig restAssuredConfig = RestAssuredConfig.config()
-                .redirect(createRedirectConfig(followRedirect));
-        return CurlLoggingRestAssuredConfigFactory.updateConfig(restAssuredConfig);
-    }
-
-    private RedirectConfig createRedirectConfig(boolean followRedirect) {
-        return RedirectConfig.redirectConfig().followRedirects(followRedirect);
+        return RestAssuredFactory.createRequestSpec(testProperties.applicationBaseUrl(), followRedirect);
     }
 
     private void printAppVersion() {
